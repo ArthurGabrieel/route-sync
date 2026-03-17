@@ -13,5 +13,3 @@ workspace:
 
 dev_dependencies:
   melos: ^7.4.1
-  flutter_test:
-    sdk: flutter

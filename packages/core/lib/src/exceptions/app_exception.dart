@@ -12,3 +12,11 @@ abstract class AppException implements Exception {
     return "$runtimeType: $message";
   }
 }
+
+class LocalStorageException extends AppException {
+  LocalStorageException(super.message, [super.stackTrace]);
+}
+
+class NetworkException extends AppException {
+  NetworkException(super.message, [super.stackTrace]);
+}

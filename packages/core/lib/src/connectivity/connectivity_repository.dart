@@ -3,8 +3,10 @@ import "dart:async";
 import "package:connectivity_plus/connectivity_plus.dart";
 import "package:result_dart/result_dart.dart";
 
+import "connectivity_service.dart";
+
 class ConnectivityRepository {
-  final Connectivity _connectivity;
+  final ConnectivityService _service;
   final _controller = StreamController<bool>.broadcast();
 
   bool _isOnline = true;
@@ -13,23 +15,20 @@ class ConnectivityRepository {
   bool get isOffline => !_isOnline;
   Stream<bool> get onlineStream => _controller.stream;
 
-  ConnectivityRepository(this._connectivity) {
-    _connectivity.onConnectivityChanged.listen((results) {
-      final wasOnline = _isOnline;
-      _isOnline = results.any((r) => r != ConnectivityResult.none);
-      if (wasOnline != _isOnline) _controller.add(_isOnline);
+  set _online(bool value) {
+    _isOnline = value;
+    _controller.add(value);
+  }
+
+  ConnectivityRepository(this._service) {
+    _service.onConnectivityChanged.listen((results) {
+      final isOnline = results.any((r) => r != ConnectivityResult.none);
+      if (isOnline != _isOnline) _online = isOnline;
     });
   }
 
   AsyncResult<bool> check() async {
-    try {
-      final results = await _connectivity.checkConnectivity();
-      _isOnline = results.any((r) => r != ConnectivityResult.none);
-      _controller.add(_isOnline);
-      return Success(_isOnline);
-    } on Exception catch (e) {
-      return Failure(e);
-    }
+    return _service.check().onSuccess((isOnline) => _online = isOnline);
   }
 
   void dispose() => _controller.close();

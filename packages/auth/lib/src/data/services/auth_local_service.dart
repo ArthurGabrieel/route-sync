@@ -1,7 +1,7 @@
 import "dart:convert";
+import "package:auth/auth.dart";
+import "package:core/core.dart";
 import "package:shared_preferences/shared_preferences.dart";
-
-import "../models/driver.dart";
 
 class AuthLocalService {
   final SharedPreferences _prefs;
@@ -11,22 +11,47 @@ class AuthLocalService {
   static const _tokenKey = "auth_token";
   static const _driverKey = "auth_driver";
 
-  Future<String?> getToken() async => _prefs.getString(_tokenKey);
-
-  Future<void> saveToken(String token) async =>
-      _prefs.setString(_tokenKey, token);
-
-  Future<Driver?> getDriver() async {
-    final json = _prefs.getString(_driverKey);
-    if (json == null) return null;
-    return Driver.fromJson(jsonDecode(json));
+  AsyncResult<String> getToken() async {
+    try {
+      final token = _prefs.getString(_tokenKey);
+      if (token == null) return const Failure(NoSessionException());
+      return Success(token);
+    } on Exception catch (e, s) {
+      return Failure(LocalStorageException(e.toString(), s));
+    }
   }
 
-  Future<void> saveDriver(Driver driver) async =>
-      _prefs.setString(_driverKey, jsonEncode(driver.toJson()));
+  AsyncResult<String> saveToken(String token) async {
+    try {
+      await _prefs.setString(_tokenKey, token);
+      return Success(token);
+    } on Exception catch (e, s) {
+      return Failure(LocalStorageException(e.toString(), s));
+    }
+  }
 
-  Future<void> clear() async {
+  AsyncResult<Driver> getDriver() async {
+    try {
+      final json = _prefs.getString(_driverKey);
+      if (json == null) return const Failure(NoSessionException());
+      return Success(Driver.fromJson(jsonDecode(json)));
+    } on Exception catch (e, s) {
+      return Failure(LocalStorageException(e.toString(), s));
+    }
+  }
+
+  AsyncResult<Driver> saveDriver(Driver driver) async {
+    try {
+      await _prefs.setString(_driverKey, jsonEncode(driver.toJson()));
+      return Success(driver);
+    } on Exception catch (e, s) {
+      return Failure(LocalStorageException(e.toString(), s));
+    }
+  }
+
+  AsyncResult<Unit> clear() async {
     await _prefs.remove(_tokenKey);
     await _prefs.remove(_driverKey);
+    return const Success(unit);
   }
 }
