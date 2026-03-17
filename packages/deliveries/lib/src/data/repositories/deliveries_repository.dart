@@ -23,8 +23,6 @@ class DeliveriesRepository {
 
   List<DeliveryModel> get deliveries => _deliveries;
 
-  bool get hasPending => false; // atualizado pelo pendingOpsStream
-
   DeliveriesRepository(this._remote, this._local, this._connectivity) {
     // Alimenta o stream inicial com o banco local via Drift
     _local.watchAll().listen((deliveries) {
@@ -35,7 +33,7 @@ class DeliveriesRepository {
     // Sync automático ao voltar online
     _connectivity.onlineStream
         .where((isOnline) => isOnline)
-        .listen((_) => _processPendingQueue());
+        .listen((_) => processPendingQueue());
   }
 
   // ── Leitura ─────────────────────────────────────────────────────────────────
@@ -116,7 +114,7 @@ class DeliveriesRepository {
 
   // ── Fila de operações pendentes ──────────────────────────────────────────────
 
-  AsyncResult<Unit> _processPendingQueue() {
+  AsyncResult<Unit> processPendingQueue() {
     return _local
         .getPending()
         .flatMap(_executeAllOps)

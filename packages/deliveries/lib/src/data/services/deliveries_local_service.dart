@@ -105,7 +105,9 @@ class DeliveriesLocalService {
     }
   }
 
-  AsyncResult<PendingOperationModel> markFailed(PendingOperationModel op) async {
+  AsyncResult<PendingOperationModel> markFailed(
+    PendingOperationModel op,
+  ) async {
     try {
       await _db.incrementRetry(op.dbId!);
       return Success(op);
