@@ -13,3 +13,4 @@ export "src/exceptions/app_exception.dart";
 export "package:result_dart/result_dart.dart";
 export "package:result_command/result_command.dart";
 export "package:drift/drift.dart" hide Column;
+export "package:shared_preferences/shared_preferences.dart";
