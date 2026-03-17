@@ -2,6 +2,20 @@ name: auth
 description: Authentication package
 version: 1.0.0
 resolution: workspace
+publish_to: none
 
 environment:
   sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  provider: ^6.1.2
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  
