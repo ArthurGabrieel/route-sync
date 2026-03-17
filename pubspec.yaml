@@ -1,0 +1,17 @@
+name: routesync_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.11.1
+
+workspace:
+  - apps/driver_app
+  - packages/core
+  - packages/auth
+  - packages/deliveries
+  - packages/route
+
+dev_dependencies:
+  melos: ^7.4.1
+  flutter_test:
+    sdk: flutter

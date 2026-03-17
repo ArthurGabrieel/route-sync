@@ -1,0 +1,11 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - always_declare_return_types
+    - avoid_empty_else
+    - prefer_const_constructors
+    - prefer_final_locals
+    - avoid_print
+    - prefer_final_fields
+    - prefer_double_quotes

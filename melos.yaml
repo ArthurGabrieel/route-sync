@@ -1,0 +1,26 @@
+name: routesync
+
+packages:
+  - apps/**
+  - packages/**
+
+scripts:
+  setup:
+    description: Primeira configuração após clone
+    run: melos bootstrap && melos gen
+
+  gen:
+    description: Roda o build_runner em todos os packages que usam Drift
+    run: dart run build_runner build --delete-conflicting-outputs
+    packageFilters:
+      dependsOn: drift
+
+  lint:
+    description: Analisa e verifica formatação em todos os packages
+    run: dart analyze && dart format --set-exit-if-changed .
+
+  test:
+    description: Roda os testes em todos os packages
+    run: flutter test
+    exec:
+      concurrency: 3

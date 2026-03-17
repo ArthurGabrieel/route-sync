@@ -1,0 +1,22 @@
+name: core
+description: Core logic and utilities.
+version: 1.0.0
+resolution: workspace
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  drift: ^2.22.1
+  drift_flutter: ^0.2.4
+  connectivity_plus: ^6.1.4
+  shared_preferences: ^2.3.5
+  result_dart: ^2.2.0
+  result_command: ^2.2.0
+  provider: ^6.1.2
+
+dev_dependencies:
+  drift_dev: ^2.22.1
+  build_runner: ^2.4.15
