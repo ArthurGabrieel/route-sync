@@ -12,3 +12,4 @@ export "src/exceptions/app_exception.dart";
 // não precisarem depender diretamente deles
 export "package:result_dart/result_dart.dart";
 export "package:result_command/result_command.dart";
+export "package:drift/drift.dart" hide Column;
