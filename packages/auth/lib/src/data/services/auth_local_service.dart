@@ -1,7 +1,6 @@
 import "dart:convert";
 import "package:auth/auth.dart";
 import "package:core/core.dart";
-import "package:shared_preferences/shared_preferences.dart";
 
 class AuthLocalService {
   final SharedPreferences _prefs;

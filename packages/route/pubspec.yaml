@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   core:
     path: ../core
+  deliveries:
+    path: ../deliveries
   provider: ^6.1.2
 
 dev_dependencies:

@@ -1,8 +1,16 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
 library;
 
-export "src/route_base.dart";
+// Models
+export "src/data/models/route_model.dart";
+export "src/data/models/route_point_model.dart";
 
-// TODO: Export any libraries intended for clients of this package.
+// Services
+export "src/data/services/route_local_service.dart";
+export "src/data/services/route_remote_service.dart";
+
+// Repository
+export "src/data/repositories/route_repository.dart";
+
+// UI
+export "src/ui/map/route_map_page.dart";
+export "src/ui/map/route_map_viewmodel.dart";
