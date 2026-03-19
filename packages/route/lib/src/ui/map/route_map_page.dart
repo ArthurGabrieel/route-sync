@@ -5,16 +5,16 @@ import "package:core/core.dart";
 import "../../../route.dart";
 import "widgets/route_progress_bar.dart";
 
-class RouteMapScreen extends StatefulWidget {
+class RouteMapPage extends StatefulWidget {
   final RouteMapViewModel viewModel;
 
-  const RouteMapScreen({required this.viewModel, super.key});
+  const RouteMapPage({required this.viewModel, super.key});
 
   @override
-  State<RouteMapScreen> createState() => _RouteMapScreenState();
+  State<RouteMapPage> createState() => _RouteMapScreenState();
 }
 
-class _RouteMapScreenState extends State<RouteMapScreen> {
+class _RouteMapScreenState extends State<RouteMapPage> {
   @override
   void initState() {
     super.initState();

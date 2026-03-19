@@ -1,4 +1,3 @@
-import "package:connectivity_plus/connectivity_plus.dart";
 import "package:core/core.dart";
 
 class ConnectivityService {

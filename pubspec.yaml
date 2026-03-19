@@ -13,3 +13,4 @@ workspace:
 
 dev_dependencies:
   melos: ^7.4.1
+  flutter_lints: ^5.0.0
